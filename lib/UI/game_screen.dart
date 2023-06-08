@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+
+var WORD = "GAMER";
 
 // ignore: must_be_immutable
 class GameScreen extends StatefulWidget {
@@ -13,6 +17,17 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (guess.length == 5) {
+      Timer(
+        const Duration(seconds: 3),
+        () {
+          setState(() {
+            guess.clear();
+          });
+        },
+      );
+    }
+
     TextEditingController controller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +50,7 @@ class _GameScreenState extends State<GameScreen> {
                   children: guess
                       .map((e) => Column(
                             children: [
-                              WordleText(e),
+                              WordleText(e.toUpperCase()),
                             ],
                           ))
                       .toList(),
@@ -80,7 +95,7 @@ class WordleText extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
-                color: Colors.red,
+                color: DetermineLetter(),
                 borderRadius: BorderRadius.all(Radius.circular(25))),
             padding: EdgeInsets.all(6),
             child: Center(
@@ -94,7 +109,7 @@ class WordleText extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
-                color: Colors.red,
+                color: WORD[1] == text[1] ? Colors.green : Colors.red,
                 borderRadius: BorderRadius.all(Radius.circular(25))),
             padding: EdgeInsets.all(6),
             child: Center(
@@ -108,7 +123,7 @@ class WordleText extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
-                color: Colors.red,
+                color: WORD[2] == text[2] ? Colors.green : Colors.red,
                 borderRadius: BorderRadius.all(Radius.circular(25))),
             padding: EdgeInsets.all(6),
             child: Center(
@@ -122,7 +137,7 @@ class WordleText extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
-                color: Colors.red,
+                color: WORD[3] == text[3] ? Colors.green : Colors.red,
                 borderRadius: BorderRadius.all(Radius.circular(25))),
             padding: EdgeInsets.all(6),
             child: Center(
@@ -136,7 +151,7 @@ class WordleText extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
-                color: Colors.red,
+                color: WORD[4] == text[4] ? Colors.green : Colors.red,
                 borderRadius: BorderRadius.all(Radius.circular(25))),
             padding: EdgeInsets.all(6),
             child: Center(
@@ -151,3 +166,7 @@ class WordleText extends StatelessWidget {
     );
   }
 }
+
+// DetermineLetter() {
+//   if (){}
+// }
